@@ -92,13 +92,13 @@ int main() {
     } else if (computer_choice == 0 && rock_paper_scissors == 1) {
         printf("You Win, Paper Covers Rock!\n");
     } else if (computer_choice == 1 && rock_paper_scissors == 2) {
-        printf("You Win, Scissors Cut Paper!\n");
+        printf("You Win, Scissors Cuts Paper!\n");
     } else if (computer_choice == 2 && rock_paper_scissors == 0) {
         printf("You Win, Rock Smashes Scissors!\n");
     } else if (rock_paper_scissors == 0 && computer_choice == 1) {
         printf("\nYou Lose :( \n\nPaper Covers Rock!\n");
     } else if (rock_paper_scissors == 1 && computer_choice == 2) {
-        printf("\nYou Lose :( \n\nScissors Cut Paper!\n");
+        printf("\nYou Lose :( \n\nScissors Cuts Paper!\n");
     } else if (rock_paper_scissors == 2 && computer_choice == 0) {
         printf("\nYou Lose :( \n\nRock Smashes Scissors!\n");
     }
