@@ -1,4 +1,4 @@
-![Skilled](https://github.com/sergio-a-juarez-1/my-agent-skills/blob/main/kcs-par-reviewer/assets/programming.gif?raw=true)
+![C-Projects](https://github.com/sergio-a-juarez-1/my-agent-skills/blob/main/kcs-par-reviewer/assets/c.gif?raw=true)
 
 # 🚀 Project Name
 
