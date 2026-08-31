@@ -2,10 +2,6 @@
 
 # 🚀 Project Name
 
-[![C Standard](https://shields.io)](https://wikipedia.org)
-[![License](https://shields.io)](LICENSE)
-[![Build Status](https://shields.io)]()
-
 A concise, single-sentence high-level description of what your C application or library does. Explain the primary problem it solves.
 
 Add a paragraph here providing more details. Talk about performance, why it was written in C (e.g., low memory footprint, speed, hardware access), and its target audience or environment.
