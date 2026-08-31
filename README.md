@@ -1,3 +1,5 @@
+![Skilled](https://github.com/sergio-a-juarez-1/my-agent-skills/blob/main/kcs-par-reviewer/assets/programming.gif?raw=true)
+
 # C-Projects
 "A collection of my first C programs, exercises, and algorithm practice."
 
