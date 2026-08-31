@@ -34,10 +34,10 @@ Execute the compiled binary:
 
 ```text
 Welcome to the tip calculator.
-What was the total bill? \$124.50
+What was the total bill? $124.50
 What percentage tip would you like to give? 10, 12, or 15? 12
 How many people to split the bill? 3
-Each person should pay: \$46.48
+Each person should pay: $46.48
 ```
 
 ## Code Logic Breakdown
