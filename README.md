@@ -28,7 +28,8 @@ These projects leverage the performance advantages of C, including its low memor
 On Ubuntu/Debian:
 ```bash
 sudo apt update
-sudo apt install build-essential valgrind
+sudo apt install build-essential git
+sudo apt install cmake
 ```
 
 On macOS (using Homebrew):
