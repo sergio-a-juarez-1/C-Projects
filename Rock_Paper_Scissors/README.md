@@ -2,7 +2,7 @@
 
 > A lightweight, highly responsive Command Line Interface (CLI) implementation of the classic Rock, Paper, Scissors game written in pure C.
 
-![Gameplay Preview](https://placeholder.com)<!-- Optional: Replace with a real screenshot or GIF of your terminal play -->
+![Gameplay Preview](https://github.com/sergio-a-juarez-1/C-Projects/blob/main/Rock_Paper_Scissors/gameplay_assets/game.gif?raw=true)<!-- Optional: Real screenshot or GIF of terminal play -->
 
 
 ---
