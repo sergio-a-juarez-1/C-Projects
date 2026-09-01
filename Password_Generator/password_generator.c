@@ -1,3 +1,7 @@
+/* Author: Sergio Juarez
+Purpose:  This is a Password Generator Program.
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
