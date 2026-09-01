@@ -1,6 +1,6 @@
 # CLI-Password Generator (C Port)
 
-A lightweight, high-performance command-line password generator written in C. This project is a direct, optimized port of a classic Python password-building script, adapted to leverage low-level array manipulation and dynamic heap memory management.
+A lightweight, high-performance command-line password generator written in C. This project leverages low-level array manipulation and dynamic heap memory management.
 
 ## Features
 
@@ -53,7 +53,7 @@ Here is your password: !8v*8O5i%b0#&7
 
 ## How It Works Under the Hood
 
-Unlike Python's abstracted container systems, the C execution workflow handles raw string manipulation directly in memory:
+The C execution workflow handles raw string manipulation directly in memory:
 1. **Dynamic Memory Allocation**: It aggregates user input variables up-front to provision a perfectly sized block of memory on the heap via `malloc()`.
 2. **ASCII Pointer Arithmetic**: Capitalization is calculated mathematically by subtracting `32` from lowercase ASCII values, saving system overhead.
 3. **Fisher-Yates Shuffle**: Rearranges the characters by stepping backward through the memory buffer and swapping indices inline using a temporary register holder.
