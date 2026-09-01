@@ -52,7 +52,7 @@ gcc --version
    ```
 2. Navigate into the project folder:
    ```bash
-   cd Rock-Paper-Scissors
+   cd Rock_Paper_Scissors
    ```
 3. Compile the source file using GCC:
    ```bash
