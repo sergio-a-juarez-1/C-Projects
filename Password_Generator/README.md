@@ -23,7 +23,7 @@ To compile and run this program, you will need a standard C compiler installed o
    ```
 2. Navigate into the project folder:
    ```bash
-   cd Rock-Paper-Scissors
+   cd Password_Generator
    ```
 3. Compile the source file using GCC:
    ```bash
