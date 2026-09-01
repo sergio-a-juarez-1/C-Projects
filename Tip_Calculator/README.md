@@ -19,7 +19,7 @@ You need a standard C compiler such as **GCC** or **Clang** installed on your op
 Open your terminal in the directory containing `main.c` and compile using the following command:
 
 ```bash
-gcc main.c -o tip_calculator
+gcc tip_calculator.c -o tip_calculator
 ```
 
 ### Running the Application
