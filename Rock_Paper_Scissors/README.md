@@ -57,7 +57,7 @@ gcc --version
    ```
 3. Compile the source file using GCC:
    ```bash
-   gcc main.c -o rps_game
+   gcc rock_paper-scissors.c -o rps_game
    ```
 
 ### Running the Game
