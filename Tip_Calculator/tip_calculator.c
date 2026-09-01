@@ -1,3 +1,6 @@
+/* Author: Sergio Juarez
+Purpose:  This is a Tip Calculator Program.
+*/
 #include <stdio.h>
 
 int main() {
