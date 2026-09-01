@@ -1,3 +1,7 @@
+/* Author: Sergio Juarez
+Purpose:  This is a game program: Rock Paper Scissors.
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
