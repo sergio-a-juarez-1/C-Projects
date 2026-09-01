@@ -17,15 +17,17 @@ To compile and run this program, you will need a standard C compiler installed o
 
 ## Installation & Compilation
 
-1. Clone this repository to your local machine:
+1. Clone the repository to your local directory:
    ```bash
-   git clone https://github.com
-   cd cli-password-generator-c
+   git clone https://github.com/sergio-a-juarez-1/C-Projects.git
    ```
-
-2. Compile the source file using a standard C compiler with optimization flags:
+2. Navigate into the project folder:
    ```bash
-   gcc -O3 main.c -o password_generator
+   cd Rock-Paper-Scissors
+   ```
+3. Compile the source file using GCC:
+   ```bash
+   gcc password_generator.c -o password_generator
    ```
 
 ## Usage
