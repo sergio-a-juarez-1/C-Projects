@@ -17,7 +17,6 @@ This project is a clean **Rock, Paper, Scissors** game built to run directly ins
 
 - **Algorithmic Randomization:** Uses time-seeded pseudo-random number generation to ensure unpredictable computer moves.
 - **Robust Input Validation:** Standardized input parsing that handles invalid numbers, characters, and spaces smoothly.
-- **Score Tracking:** Tracks player wins, computer wins, and ties dynamically across a single gaming session.
 - **Optimized Performance:** Minimal memory footprint with efficient structural layout and instant execution.
 
 ---
