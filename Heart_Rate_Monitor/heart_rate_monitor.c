@@ -124,6 +124,5 @@ int main()
         }
     }
 
-    printf("\n\n=== ByteGarage ===\n\n");
     return EXIT_SUCCESS;
 }
