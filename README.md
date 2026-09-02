@@ -1,6 +1,6 @@
 ![C-Projects](https://github.com/sergio-a-juarez-1/my-agent-skills/blob/main/kcs-par-reviewer/assets/c.gif?raw=true)
 
-# 🚀 Project Name
+# 🚀 C Projects
 
 These C Applications are designed to efficiently manage and process real-time data streams, significantly reducing latency issues faced by users in high-frequency trading environments.
 
