@@ -1,3 +1,5 @@
+![Native C Turtle Crossing Gameplay](images/turtle_crossing_arcade.gif)
+
 # 🐢 Native C Turtle Crossing Game
 
 A lightweight, high-performance **arcade crossing game** written in pure C. This game replaces heavy framework dependencies by hooking directly into low-level Linux display systems and rendering graphics natively through hardware acceleration.
