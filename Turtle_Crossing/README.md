@@ -21,7 +21,7 @@ It is inspired by classic arcade crossing mechanics and acts as a robust, native
 1.  **Objective:** Guide your green vector turtle from the bottom of the screen to the top green finish line while dodging oncoming highway traffic blocks.
 2.  **Controls:**
     *   `Up / Down / Left / Right Arrow Keys` — Control the turtle's movement vectors.
-    *   `R Key` — Instantly clears the canvas board and restarts the level after a collision crash.
+    *   `Shift + R Key` — Instantly clears the canvas board, resets the difficulty, and starts over at Level 1 after a collision crash.
     *   `Escape Key` — Safely closes all display contexts and exits cleanly to the terminal.
 3.  **Difficulty Scaling:** Each time you successfully hit the green finish line, you level up. Your progress is marked in the dashboard and traffic velocity variables scale up natively.
 
