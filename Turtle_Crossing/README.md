@@ -18,7 +18,7 @@ It is inspired by classic arcade crossing mechanics and acts as a robust, native
 
 ## 🎮 How To Play
 
-1.  **Objective:** Guide your green vector turtle from the bottom of the screen to the top green finish line while dodging oncoming highway traffic blocks.
+1.  **Objective:** Guide your turtle from the bottom of the screen to the top green finish line while dodging oncoming highway traffic blocks.
 2.  **Controls:**
     *   `Up / Down / Left / Right Arrow Keys` — Control the turtle's movement vectors.
     *   `Shift + R Key` — Instantly clears the canvas board, resets the difficulty, and starts over at Level 1 after a collision crash.
