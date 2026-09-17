@@ -1,4 +1,4 @@
-![Native C Turtle Crossing Gameplay](images/turtle_crossing_arcade.gif)
+![Native C Turtle Crossing Gameplay](https://github.com/sergio-a-juarez-1/C-practice/blob/main/Images/turtle_crossing.gif?raw=true)
 
 # 🐢 Native C Turtle Crossing Game
 
