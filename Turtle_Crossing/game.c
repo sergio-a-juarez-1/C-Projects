@@ -180,10 +180,15 @@ int main() {
             }
             
             if (xev.type == KeyPress) {
-                KeySym key = XLookupKeysym(&xev.xkey, 0);
+                char buf[10] = {0};
+                KeySym key;
+                // Upgraded to safe lookups to capture string characters smoothly
+                XLookupString(&xev.xkey, buf, sizeof(buf), &key, NULL);
+                
                 if (key == XK_Escape) goto cleanup;
                 
-                if (game_over && (key == XK_r || key == XK_R)) {
+                // Case-insensitive reset detection evaluation (Accepts 'r' or 'R' universally)
+                if (game_over && (key == XK_r || key == XK_R || buf[0] == 'r' || buf[0] == 'R')) {
                     reset_game();
                 }
 
