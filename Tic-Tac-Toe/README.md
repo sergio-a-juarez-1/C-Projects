@@ -36,7 +36,7 @@ mkdir Tic-Tac-Toe && cd Tic-Tac-Toe
 git init
 
 # Add your multi-project repo as the remote origin
-git remote add origin https://github.com
+git remote add origin https://github.com/sergio-a-juarez-1/C-Projects.git
 
 # Enable sparse-checkout and target the specific application folder
 git sparse-checkout set Tic-Tac-Toe
