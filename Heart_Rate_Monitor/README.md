@@ -7,6 +7,7 @@ A command-line terminal application written in C that calculates a user's target
 ## 📊 Heart Rate Zones Architecture
 
 Maximum Heart Rate (\(HR_{max}\)) is calculated utilizing the **Tanaka Formula**:
+
 \[HR_{max} = 208 - (0.7 \times \text{Age})\]
 
 The software monitors and segments performance across six intensity thresholds:
@@ -22,33 +23,51 @@ The software monitors and segments performance across six intensity thresholds:
 
 ---
 
-## 🛠️ Compilation and Installation
+## 🛠️ Build and Local Deployment
 
-### Prerequisites
-Ensure you have a standard C compiler such as `gcc` or `clang` installed on your host system.
+To compile and run this program, you will need a standard C compiler (GCC, Clang, or MinGW) installed on your system.
 
-### Compilation
+### 1. Isolate the Project via Sparse-Checkout
+To deploy this specific utility without pulling down your entire monorepo, initialize an empty directory and pull down only the target folder:
+
+```bash
+# Initialize an empty local repository
+mkdir Heart_Rate_Monitor && cd Heart_Rate_Monitor
+git init
+
+# Add your multi-project repo as the remote origin
+git remote add origin https://github.com
+
+# Enable sparse-checkout and target the specific application folder
+git sparse-checkout set Heart_Rate_Monitor
+
+# Pull down only that folder's files
+git pull origin main
+```
+
+### 2. Compilation
 Compile the standard source code file using the following terminal command:
 ```bash
 gcc -O2 main.c -o hr_monitor
 ```
 
----
-
-## 💻 Usage
-
-Execute the compiled application binary:
+### 3. Running the Application
+Execute the compiled application binary from your terminal:
 ```bash
 ./hr_monitor
 ```
 
-### Application Lifecycle Flow
-1. **Demographics Input**: The program prompts for your current age.
-2. **Zone Mapping**: It outputs your absolute \(HR_{max}\) alongside a structured tabular summary mapping out your personalized BPM boundaries.
-3. **Real-time Loop Monitoring**: Enter any arbitrary numeric BPM value to check your current training zone footprint.
-4. **Termination Sequence**: Input `0` or any negative value (`-1`) to safely terminate execution loop instances.
+---
+
+## 💻 Application Lifecycle Flow
+
+1. **Demographics Input:** The program prompts for your current age.
+2. **Zone Mapping:** It outputs your absolute \(HR_{max}\) alongside a structured tabular summary mapping out your personalized BPM boundaries.
+3. **Real-time Loop Monitoring:** Enter any arbitrary numeric BPM value to check your current training zone footprint.
+4. **Termination Sequence:** Input `0` or any negative value (`-1`) to safely terminate execution loop instances.
 
 ### Execution Example
+
 ```text
 === Workouts Heart Rate Monitor ===
 
