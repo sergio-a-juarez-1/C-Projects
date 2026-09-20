@@ -11,7 +11,9 @@ A lightweight, terminal-based **Tic-Tac-Toe** game written in C. This project fe
 * **Input Validation:** Prevents players from choosing an already-occupied cell or invalid entry, keeping the turn active.
 * **Automatic Game Resolution:** Continuously evaluates the board state to instantly declare a win, a loss, or a draw.
 
-## How to Play
+---
+
+## 🎮 How to Play
 
 1. The game is played on a 3x3 grid numbered from 1 to 9.
 2. Player 1 is assigned **X** and Player 2 is assigned **O**.
@@ -19,38 +21,51 @@ A lightweight, terminal-based **Tic-Tac-Toe** game written in C. This project fe
 4. The first player to align 3 of their marks horizontally, vertically, or diagonally wins.
 5. If all 9 squares are filled without a winner, the game results in a draw.
 
-## Prerequisites
+---
 
-To compile and run this program, you will need a C compiler installed on your system:
-* **GCC / Clang:** Standard Linux/macOS compilers.
-* **MinGW / MSVC:** Windows compilers.
+## 🛠️ Build and Local Deployment
 
-## Compilation and Installation
+To compile and run this program, you will need a standard C compiler (GCC, Clang, or MinGW) installed on your system.
 
-1. Clone or download the repository containing the source code.
-2. Open your terminal or command prompt and navigate to the folder:
-   ```bash
-   cd path/to/Tic-Tac-Toe
-   ```
-3. Compile the program using GCC:
-   ```bash
-   gcc tic_tac_toe.c -o tictactoe
-   ```
+### 1. Isolate the Project via Sparse-Checkout
+To deploy this specific game without pulling down your entire monorepo, initialize an empty directory and pull down only the target folder:
 
-## Usage
+```bash
+# Initialize an empty local repository
+mkdir Tic-Tac-Toe && cd Tic-Tac-Toe
+git init
 
+# Add your multi-project repo as the remote origin
+git remote add origin https://github.com
+
+# Enable sparse-checkout and target the specific application folder
+git sparse-checkout set Tic-Tac-Toe
+
+# Pull down only that folder's files
+git pull origin main
+```
+
+### 2. Compilation
+Compile the program using GCC:
+```bash
+gcc tic_tac_toe.c -o tictactoe
+```
+
+### 3. Running the Application
 Run the compiled executable from your terminal:
 
-* **Windows:**
-  ```cmd
-  tictactoe.exe
-  ```
 * **Linux / macOS:**
   ```bash
   ./tictactoe
   ```
+* **Windows:**
+  ```cmd
+  tictactoe.exe
+  ```
 
-## Code Architecture
+---
+
+## 📂 Code Architecture
 
 The game is structured using three core procedural functions:
 * `displayBoard()`: Renders the 3x3 layout and prints the player labels. Clears the screen using system utilities before drawing.
