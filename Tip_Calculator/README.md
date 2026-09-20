@@ -18,6 +18,7 @@ You need a standard C compiler such as **GCC** or **Clang** installed on your op
 
 To deploy this specific program without pulling down the entire `C-Projects` monorepo, follow these steps to use **Git sparse-checkout**:
 
+```bash
 # 1. Initialize an empty local repository
 mkdir Tip_Calculator && cd Tip_Calculator
 git init
@@ -30,6 +31,7 @@ git sparse-checkout set Tip_Calculator
 
 # 4. Pull down only that folder's files
 git pull origin main
+```
 
 ### Compilation
 
