@@ -36,16 +36,34 @@ To run this desktop game on any standard Ubuntu, Debian, or Linux Mint environme
 ### 1. Install System Requirements
 ```bash
 sudo apt update
-sudo apt install build-essential libgl1-mesa-dev libx11-dev
+sudo apt install build-essential libgl1-mesa-dev libx11-dev git
 ```
 
-### 2. Compilation
+### 2. Isolate the Project via Sparse-Checkout
+To deploy this specific game without pulling down your entire monorepo, initialize an empty directory and pull down only the target folder:
+
+```bash
+# Initialize an empty local repository
+mkdir Turtle_Crossing && cd Turtle_Crossing
+git init
+
+# Add your multi-project repo as the remote origin
+git remote add origin https://github.com
+
+# Enable sparse-checkout and target the specific application folder
+git sparse-checkout set Turtle_Crossing
+
+# Pull down only that folder's files
+git pull origin main
+```
+
+### 3. Compilation
 Compile using standard hardware-accelerated link flags:
 ```bash
 gcc game.c -o native_turtle -lGL -lX11
 ```
 
-### 3. Run the Game
+### 4. Run the Game
 ```bash
 ./native_turtle
 ```
