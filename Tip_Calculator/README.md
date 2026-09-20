@@ -24,7 +24,7 @@ mkdir Tip_Calculator && cd Tip_Calculator
 git init
 
 # 2. Add your multi-project repo as the remote origin
-git remote add origin https://github.com/sergio-a-juarez-1/Python-Projects.git
+git remote add origin https://github.com/sergio-a-juarez-1/C-Projects.git
 
 # 3. Enable sparse-checkout and tell Git exactly which folder you want
 git sparse-checkout set Tip_Calculator
