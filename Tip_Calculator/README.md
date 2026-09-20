@@ -14,6 +14,23 @@ A clean, terminal-based **interactive bill splitter and tip calculator** written
 
 You need a standard C compiler such as **GCC** or **Clang** installed on your operating system.
 
+## 🚀 Getting Started & Installation
+
+To deploy this specific program without pulling down the entire `C-Projects` monorepo, follow these steps to use **Git sparse-checkout**:
+
+# 1. Initialize an empty local repository
+mkdir Tip_Calculator && cd Tip_Calculator
+git init
+
+# 2. Add your multi-project repo as the remote origin
+git remote add origin https://github.com/sergio-a-juarez-1/Python-Projects.git
+
+# 3. Enable sparse-checkout and tell Git exactly which folder you want
+git sparse-checkout set Tip_Calculator
+
+# 4. Pull down only that folder's files
+git pull origin main
+
 ### Compilation
 
 Open your terminal in the directory containing `main.c` and compile using the following command:
