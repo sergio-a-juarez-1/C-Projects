@@ -2,8 +2,7 @@
 
 > A lightweight, highly responsive Command Line Interface (CLI) implementation of the classic Rock, Paper, Scissors game written in pure C.
 
-![Gameplay Preview](https://github.com/sergio-a-juarez-1/C-Projects/blob/main/Rock_Paper_Scissors/gameplay_assets/game.gif?raw=true)<!-- Optional: Real screenshot or GIF of terminal play -->
-
+![Gameplay Preview](https://github.com/sergio-a-juarez-1/C-Projects/blob/main/Rock_Paper_Scissors/gameplay_assets/game.gif?raw=true)
 
 ---
 
@@ -29,52 +28,7 @@ This project is a clean **Rock, Paper, Scissors** game built to run directly ins
 
 ---
 
-## Getting Started
-
-Follow these instructions to compile and play the game locally on your machine.
-
-### Prerequisites
-
-Ensure you have a C compiler installed on your system:
-- **Linux/macOS:** GCC or Clang (usually pre-installed or available via `build-essential` / `Xcode Command Line Tools`)
-- **Windows:** MinGW, MSVC (via Visual Studio), or WSL
-
-Check your compiler version by running:
-```bash
-gcc --version
-```
-
-### Compilation
-
-1. Clone the repository to your local directory:
-   ```bash
-   git clone https://github.com/sergio-a-juarez-1/C-Projects.git
-   ```
-2. Navigate into the project folder:
-   ```bash
-   cd Rock_Paper_Scissors
-   ```
-3. Compile the source file using GCC:
-   ```bash
-   gcc rock_paper-scissors.c -o rps_game
-   ```
-
-### Running the Game
-
-Execute the compiled binary from your terminal:
-
-- **Linux/macOS:**
-  ```bash
-  ./rps_game
-  ```
-- **Windows:**
-  ```cmd
-  rps_game.exe
-  ```
-
----
-
-## How to Play
+## 🎮 How to Play
 
 1. Upon launch, the terminal will display a selection menu.
 2. Enter your choice corresponding to the menu item:
@@ -86,13 +40,55 @@ Execute the compiled binary from your terminal:
    - Rock beats Scissors
    - Scissors beats Paper
    - Paper beats Rock
+
 ---
 
-## Project Structure
+## 🛠️ Build and Local Deployment
+
+To compile and run this program, you will need a standard C compiler (GCC, Clang, or MinGW) installed on your system.
+
+### 1. Isolate the Project via Sparse-Checkout
+To deploy this specific game without pulling down your entire monorepo, initialize an empty directory and pull down only the target folder:
+
+```bash
+# Initialize an empty local repository
+mkdir Rock_Paper_Scissors && cd Rock_Paper_Scissors
+git init
+
+# Add your multi-project repo as the remote origin
+git remote add origin https://github.com/sergio-a-juarez-1/C-Projects.git
+
+# Enable sparse-checkout and target the specific application folder
+git sparse-checkout set Rock_Paper_Scissors
+
+# Pull down only that folder's files
+git pull origin main
+```
+
+### 2. Compilation
+Compile the source file using GCC:
+```bash
+gcc rock_paper_scissors.c -o rps_game
+```
+
+### 3. Running the Game
+Execute the compiled binary from your terminal:
+
+* **Linux/macOS:**
+  ```bash
+  ./rps_game
+  ```
+* **Windows:**
+  ```cmd
+  rps_game.exe
+  ```
+
+---
+
+## 📂 Project Structure
 
 ```text
-rock-paper-scissors-c/
-├── rock_paper_scissors.c           # Main game loop, input handling, and core logic
-├── README.md        # Project documentation
-
+Rock_Paper_Scissors/
+├── rock_paper_scissors.c    # Main game loop, input handling, and core logic
+└── README.md                # Project documentation
 ```
