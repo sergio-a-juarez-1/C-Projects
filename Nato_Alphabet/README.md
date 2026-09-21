@@ -1,3 +1,5 @@
+![NATO Phonetic Alphabet GUI Dashboard](https://github.com/sergio-a-juarez-1/C-practice/blob/main/Images/nato_alphabet.png?raw=true)
+
 # NATO Phonetic Alphabet GUI Dashboard
 
 A high-performance graphical desk utility written in C that parses a CSV dataset to convert typed input text into its corresponding NATO phonetic alphabet code words. This project swaps high-level Python Pandas and Tkinter abstractions for an ultra-fast, immediate-mode GUI environment powered by Raylib, native file I/O operations, and optimized array-offset memory mapping.
