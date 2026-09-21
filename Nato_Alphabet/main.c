@@ -1,3 +1,7 @@
+/* Author: Sergio Juarez
+Purpose:  This is a Nato Phonetic Alphabet GUI program.
+*/
+
 #include "raylib.h"
 #define RAYGUI_IMPLEMENTATION
 #include "raygui.h"
