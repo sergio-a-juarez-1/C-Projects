@@ -40,7 +40,7 @@ int main() {
 
     int index = 0;
 
-    // 1. Process and load randomized letters (with coin-flip capitalization)
+    // 1. Process and load randomized letters 
     for (int s = 0; s < letters_1; s++) {
         int selector = rand() % 26;
         int cap = rand() % 2;
