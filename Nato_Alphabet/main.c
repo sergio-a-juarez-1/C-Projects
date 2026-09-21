@@ -18,7 +18,7 @@
 #define COLOR_ACCENT      GetColor(0x0A84FFFF) // Electric Neon Blue (Highly readable)
 #define COLOR_BORDER      GetColor(0x2C2C2EFF) // Subtle boundary panel division
 
-// Custom pure C word wrap function to measure space metrics cleanly
+// Function to measure space metrics cleanly
 void DrawTextWrapped(const char *text, int posX, int posY, int maxWidth, int fontSize, Color color) {
     char word[MAX_CODE_LEN + 10];
     int wordIdx = 0;
