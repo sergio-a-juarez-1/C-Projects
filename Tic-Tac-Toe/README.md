@@ -1,6 +1,6 @@
 ### Tic-Tac-Toe Game in C
 
-A lightweight, terminal-based **Tic-Tac-Toe** game written in C. This enhanced project features local 2-player multiplayer, a smart AI opponent with multiple difficulty levels (including an unbeatable Minimax engine), cross-round score tracking, and an alternating tournament-style turn structure. 
+A lightweight, terminal-based **Tic-Tac-Toe** game written in C. This enhanced project features local 2-player multiplayer, a smart AI opponent with multiple difficulty levels, cross-round score tracking, and an alternating tournament-style turn structure. 
 
 ### ✨ Features
 
