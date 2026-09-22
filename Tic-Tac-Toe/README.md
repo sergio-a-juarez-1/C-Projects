@@ -27,12 +27,6 @@ A lightweight, terminal-based **Tic-Tac-Toe** game written in C. This enhanced p
 
 To compile and run this program, you will need a standard C compiler (GCC, Clang, or MinGW) installed on your system. 
 
-### 1. Isolate the Project via Sparse-Checkout
-
-To deploy this specific game without pulling down your entire monorepo, initialize an empty directory and pull down only the target folder: 
-
-bash
-
 # Initialize an empty local repository
 mkdir Tic-Tac-Toe && cd Tic-Tac-Toe
 git init
@@ -46,7 +40,6 @@ git sparse-checkout set Tic-Tac-Toe
 # Pull down only that folder's files
 git pull origin main
 
-Use code with caution.
 
 ### 2. Compilation
 
