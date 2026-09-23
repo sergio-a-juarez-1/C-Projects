@@ -10,14 +10,14 @@ struct MemoryStruct {
     size_t size;
 };
 
-// Callback function used by libcurl to write chunked API payloads
+// Callback function used by libcurl to write chunked API payloads safely
 static size_t WriteMemoryCallback(void *contents, size_t size, size_t nmemb, void *userp) {
     size_t realsize = size * nmemb;
     struct MemoryStruct *mem = (struct MemoryStruct *)userp;
 
     char *ptr = realloc(mem->memory, mem->size + realsize + 1);
     if (!ptr) {
-        printf("Error: Not enough memory (realloc failed)\n");
+        fprintf(stderr, "[ERROR] Out of memory (realloc failed)\n");
         return 0;
     }
 
@@ -29,50 +29,64 @@ static size_t WriteMemoryCallback(void *contents, size_t size, size_t nmemb, voi
     return realsize;
 }
 
-// Function to process and parse Okta JSON logs
-void process_okta_logs(const char *raw_json) {
+// Function to process and parse targeted Okta failure telemetry
+void process_security_events(const char *raw_json) {
     cJSON *json_array = cJSON_Parse(raw_json);
     if (json_array == NULL) {
         const char *error_ptr = cJSON_GetErrorPtr();
         if (error_ptr != NULL) {
-            fprintf(stderr, "Error parsing JSON before: %s\n", error_ptr);
+            fprintf(stderr, "[ERROR] JSON Parsing failed before: %s\n", error_ptr);
         }
         return;
     }
 
-    // Ensure Okta returned an array of events
     if (cJSON_IsArray(json_array)) {
         int array_size = cJSON_GetArraySize(json_array);
-        printf("[INFO] Successfully fetched %d security events.\n", array_size);
+        if (array_size == 0) {
+            printf("[INFO] No suspicious authentication failures discovered in this window.\n");
+            cJSON_Delete(json_array);
+            return;
+        }
+
+        printf("\n[ALERT] Found %d security warning alerts:\n", array_size);
+        printf("%-25s %-30s %s\n", "Timestamp", "Actor Login", "Reason");
+        printf("===========================================================================\n");
 
         for (int i = 0; i < array_size; i++) {
             cJSON *item = cJSON_GetArrayItem(json_array, i);
             
-            // Extract key cybersecurity datapoints from Okta Schema
             cJSON *published = cJSON_GetObjectItemCaseSensitive(item, "published");
-            cJSON *event_type = cJSON_GetObjectItemCaseSensitive(item, "eventType");
-            cJSON *display_text = cJSON_GetObjectItemCaseSensitive(item, "displayMessage");
-            cJSON *outcome = cJSON_GetObjectItemCaseSensitive(item, "outcome");
-
-            char *result = "UNKNOWN";
-            if (cJSON_IsObject(outcome)) {
-                cJSON *result_obj = cJSON_GetObjectItemCaseSensitive(outcome, "result");
-                if (cJSON_IsString(result_obj)) {
-                    result = result_obj->valuestring;
+            
+            // Navigate the nested 'actor' abstraction safely
+            char *actor_login = "System/Unknown";
+            cJSON *actor = cJSON_GetObjectItemCaseSensitive(item, "actor");
+            if (cJSON_IsObject(actor)) {
+                cJSON *alt_id = cJSON_GetObjectItemCaseSensitive(actor, "alternateId");
+                if (cJSON_IsString(alt_id)) {
+                    actor_login = alt_id->valuestring;
                 }
             }
 
-            // Simple SIEM/Syslog formatting simulation
-            if (cJSON_IsString(published) && cJSON_IsString(event_type)) {
-                printf("[%s] ALERT - Event: %s | Status: %s | Msg: %s\n",
-                       published->valuestring,
-                       event_type->valuestring,
-                       result,
-                       cJSON_IsString(display_text) ? display_text->valuestring : "N/A");
+            // Navigate the nested 'outcome' abstraction safely
+            char *reason = "Unknown Auth Block";
+            cJSON *outcome = cJSON_GetObjectItemCaseSensitive(item, "outcome");
+            if (cJSON_IsObject(outcome)) {
+                cJSON *reason_obj = cJSON_GetObjectItemCaseSensitive(outcome, "reason");
+                if (cJSON_IsString(reason_obj)) {
+                    reason = reason_obj->valuestring;
+                }
+            }
+
+            if (cJSON_IsString(published)) {
+                // Truncate timestamp string visually for formatted stdout matching the Python layout
+                char time_buff[26];
+                snprintf(time_buff, sizeof(time_buff), "%s", published->valuestring);
+                
+                printf("%-25s %-30s %s\n", time_buff, actor_login, reason);
             }
         }
+        printf("\n");
     } else {
-        // Okta occasionally returns an error object instead of an array if the token is invalid
         printf("[WARN] Response was not a valid log array. Payload: %s\n", raw_json);
     }
 
@@ -80,6 +94,16 @@ void process_okta_logs(const char *raw_json) {
 }
 
 int main(void) {
+    // 1. Fetch secure configuration from OS Environment Variables
+    const char *api_token = getenv("OKTA_API_TOKEN");
+    const char *tenant_url = getenv("OKTA_TENANT_URL");
+
+    if (!api_token || !tenant_url) {
+        fprintf(stderr, "[ERROR] Missing configuration environment parameters.\n");
+        fprintf(stderr, "Please export OKTA_API_TOKEN and OKTA_TENANT_URL before running.\n");
+        return 1;
+    }
+
     CURL *curl_handle;
     CURLcode res;
     struct MemoryStruct chunk;
@@ -87,22 +111,18 @@ int main(void) {
     chunk.memory = malloc(1); 
     chunk.size = 0;    
 
-    // Configuration - Replace placeholders with your sandbox information
-    const char *okta_domain = "https://okta.com"; 
-    const char *api_token = "YOUR_OKTA_API_TOKEN_HERE";
+    // URL Encode the Okta filter criteria to ensure safe character parsing over the wire
+    // Filter matches Python: outcome.result eq "FAILURE" and eventType sw "user.authentication"
+    const char *url_encoded_filter = "outcome.result%20eq%20%22FAILURE%22%20and%20eventType%20sw%20%22user.authentication%22";
     
-    // FIX: Allocated 512 bytes on the stack to prevent memory corruption
-    char url[512];
-    snprintf(url, sizeof(url), "%s/api/v1/logs?limit=5", okta_domain);
+    char url[1024];
+    snprintf(url, sizeof(url), "%s/api/v1/logs?filter=%s&limit=100", tenant_url, url_encoded_filter);
 
     curl_global_init(CURL_GLOBAL_ALL);
     curl_handle = curl_easy_init();
 
     if (curl_handle) {
-        // Setup HTTP Headers required for Okta API Authorization
         struct curl_slist *headers = NULL;
-        
-        // FIX: Allocated 512 bytes on the stack for the header authorization string
         char auth_header[512];
         snprintf(auth_header, sizeof(auth_header), "Authorization: SSWS %s", api_token);
         
@@ -110,26 +130,22 @@ int main(void) {
         headers = curl_slist_append(headers, "Accept: application/json");
         headers = curl_slist_append(headers, "Content-Type: application/json");
 
-        // Set Target URL and Headers
         curl_easy_setopt(curl_handle, CURLOPT_URL, url);
         curl_easy_setopt(curl_handle, CURLOPT_HTTPHEADER, headers);
-
-        // Bind standard callback parameters to handle response streams safely
         curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, WriteMemoryCallback);
         curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, (void *)&chunk);
-        curl_easy_setopt(curl_handle, CURLOPT_USERAGENT, "C-Okta-SIEM-Forwarder/1.0");
+        curl_easy_setopt(curl_handle, CURLOPT_USERAGENT, "C-Okta-SIEM-Forwarder-Pro/2.0");
+        curl_easy_setopt(curl_handle, CURLOPT_TIMEOUT, 10L); // 10 second timeout matching Python
 
-        printf("[*] Polling security events from Okta API...\n");
+        printf("[*] Scanning Okta logs for high-severity authentication failures...\n");
         res = curl_easy_perform(curl_handle);
 
         if (res != CURLE_OK) {
-            fprintf(stderr, "API Request Failed: %s\n", curl_easy_strerror(res));
+            fprintf(stderr, "[Network/API Error] System Log querying failed: %s\n", curl_easy_strerror(res));
         } else {
-            // Process the collected dynamic buffer
-            process_okta_logs(chunk.memory);
+            process_security_events(chunk.memory);
         }
 
-        // Cleanup Allocations
         curl_easy_cleanup(curl_handle);
         curl_slist_free_all(headers);
     }
