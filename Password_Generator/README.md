@@ -86,6 +86,16 @@ Launch the standalone binary directly from your active desktop terminal frame or
 ./gui_password
 ```
 
+### 5. Deleting the Application
+# Delete the local desktop shortcut configuration mapping
+rm -f "$HOME/.local/share/applications/c-password-generator.desktop"
+
+# Flush the desktop database cache to instantly update the search index
+if command -v update-desktop-database &> /dev/null; then
+    update-desktop-database "$HOME/.local/share/applications"
+fi
+
+
 ---
 
 ## 📂 Deep Dive Under the Hood
