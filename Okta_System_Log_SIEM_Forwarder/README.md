@@ -1,4 +1,4 @@
-# Okta Security Log SIEM Forwarder (C-Based)
+# Okta Security Log SIEM Forwarder
 
 A lightweight, ultra-high-performance security log forwarder written in pure C. This tool interfaces directly with the cloud-native **Okta System Log API**, pulling real-time authentication and administration telemetry down into memory, parsing it natively, and standardizing it into an actionable alert stream for SIEM ingestion.
 
