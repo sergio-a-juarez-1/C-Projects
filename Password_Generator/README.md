@@ -1,41 +1,47 @@
-# CLI-Password Generator
+# C-Password Generator GUI Utility
 
-A lightweight, high-performance command-line password generator written in C. This project leverages low-level array manipulation and dynamic heap memory management.
+A low-latency, zero-dependency desktop utility written in pure C that builds, randomizes, shuffles, and profiles high-entropy security credentials. This project swaps heavy third-party layout engines for a custom, ultra-fast immediate-mode graphical environment operating directly over the native Linux X11/Xlib protocol structures.
 
 ---
 
 ## Key Features
 
-- **Customized Composition:** Choose the exact quantity of letters, special symbols, and numbers required for your credentials.
-- **Dynamic Case Flipping:** Implements a balanced coin-flip algorithmic process to automatically randomize uppercase and lowercase letters.
-- **Fisher-Yates Shuffle Execution:** Employs an explicit inplace Fisher-Yates array shuffling loop to guarantee true layout unpredictability without structural data collision or loss.
-- **Cross-Platform Compatibility:** Fully compatible with both Windows and Unix-based (`gcc`/`clang`) compiler Toolchains.
+- **Live Alphanumeric Parameter Structuring:** Utilizes interactive increment buttons to modify character array distributions, recalculating password composition layout pools on the fly.
+- **Real-Time Entropy Profiling:** Implements an integrated security metric subroutine that dynamically audits character balance ratios to classify credentials as WEAK, MEDIUM, or STRONG.
+- **Native Selection Handshake:** Implements a direct X11 Clipboard inter-process communication handler (`CLIPBOARD`/`UTF8_STRING` Atoms) to instantly staging keys into the OS cache upon clicking the container card.
+- **OLED Matte Dark Theme:** Configured with high-contrast deep charcoal backdrops and vibrant neon-green layout boundaries to guarantee excellent legibility under all desktop environments.
+- **Zero Library Bloat:** Operates with absolute freedom from external engines, matching strict memory management routines to keep execution footprints minimal.
 
 ---
 
 ## 🎮 How It Works & Example Run
 
-The application dynamically requests your parameters step-by-step to generate a custom-tailored password block:
+The application initializes an independent window thread and polls local desktop inputs to synchronize password buffers instantaneously:
 
 ```text
-Welcome to the CLI-Password Generator!
-How many letters would you like in your password?
-4
-How many symbols would you like?
-5
-How many numbers would you like?
-5
-Here is your password: !8v*8O5i%b0#&7
+PASSWORD GENERATOR
+Configure text arrays to sample output layout pools:
+
+  Letters Count:    [ - ]  14  [ + ]
+  Symbols Count:    [ - ]   4  [ + ]
+  Numbers Count:    [ - ]   7  [ + ]
+
+  Password Strength: STRONG
+  
+  Generated Key Layout (Click box to Copy):
+  [ us@1w4!7x1*g$I6kCSOY2o2Hx                     ]
+  
+  Success: Password copied to OS clipboard tracker!
 ```
 
 ---
 
 ## 🛠️ Build and Local Deployment
 
-To compile and run this program, you will need a standard C compiler (GCC, Clang, or MinGW) installed on your system.
+To compile and run this application, you will need a standard C compiler (GCC/Clang), GNU Make, and base X11 core developer libraries installed on your distribution pipeline.
 
 ### 1. Isolate the Project via Sparse-Checkout
-To deploy this specific utility without pulling down your entire monorepo, initialize an empty directory and pull down only the target folder:
+To deploy this specific utility without pulling down your entire monorepo, initialize an empty directory and target only this branch folder:
 
 ```bash
 # Initialize an empty local repository
@@ -52,24 +58,25 @@ git sparse-checkout set Password_Generator
 git pull origin main
 ```
 
-### 2. Compilation
-Compile the source file using GCC:
+### 2. Compilation via Build Automation
+Compile the desktop window system using your predefined automation script:
 ```bash
-gcc password_generator.c -o password_generator
+make
 ```
+*(To flush out previous binaries and reset your local workspace folder, you can run `make clean` at any time).*
 
 ### 3. Running the Application
-Execute the compiled binary from your command terminal:
+Launch the standalone binary directly from your active desktop terminal frame:
 
 ```bash
-./password_generator
+./gui_password
 ```
 
 ---
 
 ## 📂 Deep Dive Under the Hood
 
-The C execution workflow handles raw string manipulation directly in memory:
-1. **Dynamic Memory Allocation:** It aggregates user input variables up-front to provision a perfectly sized block of memory on the heap via `malloc()`.
-2. **ASCII Pointer Arithmetic:** Capitalization is calculated mathematically by subtracting `32` from lowercase ASCII values, saving system overhead.
-3. **Fisher-Yates Shuffle:** Rearranges the characters by stepping backward through the memory buffer and swapping indices inline using a temporary register holder.
+The execution loop processes graphical state changes and memory layouts with low-overhead efficiency:
+1. **Fisher-Yates Data Shuffling:** Processes randomized pools consecutively across local loops before applying an in-place Fisher-Yates array-offset swapping matrix to prevent systemic predictability patterns.
+2. **Immediate-Mode Graphics Pipelines:** Eliminates retaining scene trees by forcing layout dimensions and input checks (`Expose` and `ButtonPress` events) to cycle synchronously inside a raw `XNextEvent` handler loop.
+3. **Protected Inter-Process Communication:** Overrides native clipboard buffers by answering external `SelectionRequest` hooks from other apps via atom handshakes, exposing strings only upon validation.
