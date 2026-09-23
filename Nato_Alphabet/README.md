@@ -1,4 +1,4 @@
-
+![NATO GUI](https://github.com/sergio-a-juarez-1/C-practice/blob/main/Images/nato_alphabet.png?raw=true)
 
 # NATO Phonetic Alphabet GUI Dashboard
 
