@@ -1,3 +1,5 @@
+![Password Generator GUI](https://github.com/sergio-a-juarez-1/C-practice/blob/main/Images/password_generator.png?raw=true)
+
 # C-Password Generator GUI Utility
 
 A low-latency, zero-dependency desktop utility written in pure C that builds, randomizes, shuffles, and profiles high-entropy security credentials. This project swaps heavy third-party layout engines for a custom, ultra-fast immediate-mode graphical environment operating directly over the native Linux X11/Xlib protocol structures.
