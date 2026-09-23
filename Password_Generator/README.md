@@ -10,8 +10,9 @@ A low-latency, zero-dependency desktop utility written in pure C that builds, ra
 
 - **Live Alphanumeric Parameter Structuring:** Utilizes interactive increment buttons to modify character array distributions, recalculating password composition layout pools on the fly.
 - **Real-Time Entropy Profiling:** Implements an integrated security metric subroutine that dynamically audits character balance ratios to classify credentials as WEAK, MEDIUM, or STRONG.
-- **Native Selection Handshake:** Implements a direct X11 Clipboard inter-process communication handler (`CLIPBOARD`/`UTF8_STRING` Atoms) to instantly staging keys into the OS cache upon clicking the container card.
+- **Native Selection Handshake:** Implements a direct X11 Clipboard inter-process communication handler (`CLIPBOARD`/`UTF8_STRING` Atoms) to instantly stage keys into the OS cache upon clicking the container card.
 - **OLED Matte Dark Theme:** Configured with high-contrast deep charcoal backdrops and vibrant neon-green layout boundaries to guarantee excellent legibility under all desktop environments.
+- **Desktop Launcher Integration:** Equipped with a native shell initialization deployment script to seamlessly register the binary with the system applications menu.
 - **Zero Library Bloat:** Operates with absolute freedom from external engines, matching strict memory management routines to keep execution footprints minimal.
 
 ---
@@ -67,8 +68,19 @@ make
 ```
 *(To flush out previous binaries and reset your local workspace folder, you can run `make clean` at any time).*
 
-### 3. Running the Application
-Launch the standalone binary directly from your active desktop terminal frame:
+### 3. Native Application Menu Installation
+To add the program to your native Ubuntu Search Bar application deck and allow pinning to your system dock favorite trays, execute the layout installer:
+
+```bash
+# Provide script execution privileges
+chmod +x install_launcher.sh
+
+# Run the local environment installation
+./install_launcher.sh
+```
+
+### 4. Running the Application
+Launch the standalone binary directly from your active desktop terminal frame or click the application icon in your desktop launcher:
 
 ```bash
 ./gui_password
