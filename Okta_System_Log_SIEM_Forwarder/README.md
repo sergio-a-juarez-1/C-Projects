@@ -7,9 +7,10 @@ Unlike traditional Python or Java-based log collectors, this implementation prov
 ## ✨ Features
 * **Zero-Hardcoded Secrets (`getenv`):** Ingests sensitive API infrastructure parameters directly from process memory workspace to safeguard against source-control exposure.
 * **Server-Side Log Filtering:** Optimizes bandwidth and host CPU cycles by requesting *only* targeted authentication failures directly over the wire (`outcome.result eq "FAILURE"`).
+* **Multi-Stage Dockerized Deployment:** Compiles inside an isolated build container, producing a minimal production image completely stripped of compiler tools to minimize attack surface.
+* **Privilege-Isolated Runtime:** Runs under a dedicated, non-root system user context (`security_user`) inside the container matrix to strictly enforce defense-in-depth boundaries.
 * **Heap-Safe Stream Reallocation:** Employs dynamic callback buffers (`libcurl`) engineered explicitly to protect against classic heap vulnerabilities.
 * **Native JSON Processing:** Utilizes `cJSON` to recursively parse structured cloud events directly in memory without relying on bulky execution virtual machines.
-* **SIEM-Ready Output:** Normalizes raw multi-nested payloads into single-line alerts compatible with Splunk, ElasticSearch, Logstash, or standard Linux `syslog`.
 
 ## 🏗️ Architecture & Data Flow
 1. **Runtime Context Gathering:** The application reads `OKTA_API_TOKEN` and `OKTA_TENANT_URL` dynamically from the host environment variables.
@@ -17,10 +18,10 @@ Unlike traditional Python or Java-based log collectors, this implementation prov
 3. **In-Memory Parsing:** The raw string is parsed into a native JSON object array where nested identity structures (`published`, `actor.alternateId`, `outcome.reason`) are extracted.
 4. **Output Generation:** The program displays a structured column matrix to `stdout` or pipes it straight to dedicated logging daemons.
 
-## 🛠️ Prerequisites & Installation
+## 🛠️ Prerequisites & Local Installation
 
 ### 1. Install System Development Libraries
-Before compiling, you must install the development headers for both `curl` and `cJSON` via your Linux package manager.
+Before compiling locally, you must install the development headers for both `curl` and `cJSON` via your Linux package manager.
 
 **Debian/Ubuntu:**
 ```bash
@@ -38,30 +39,56 @@ Do not hardcode your API keys inside the code. Instead, export them to your shel
 
 ```bash
 export OKTA_API_TOKEN="your-secret-ssws-token"
-export OKTA_TENANT_URL="https://your-company-domain.okta.com"
+export OKTA_TENANT_URL="https://okta.com"
 ```
 
-## 🚀 Compilation & Usage
+## 🚀 Native Compilation & Usage
 
 Compile the source tree using `gcc`. You must explicitly pass the `-lcurl` and `-lcjson` linker flags to pair the shared system objects:
 
 ```bash
-gcc okta_forwarder_pro.c -o okta_forwarder_pro -lcurl -lcjson
+gcc main.c -o okta_forwarder -lcurl -lcjson
 ```
 
 ### Running the Application
 
 Execute the compiled binary directly (inline environment declaration pattern):
 ```bash
-OKTA_API_TOKEN="your-secret-token" OKTA_TENANT_URL="https://company.okta.com" ./okta_forwarder_pro
+OKTA_API_TOKEN="your-secret-token" OKTA_TENANT_URL="https://okta.com" ./okta_forwarder
 ```
 
-### Piping Logs to a SIEM / Local File
-To simulate a continuous SIEM collector on a production layout, route the structured standard output directly into an infrastructure file:
+---
+
+## 🐳 Containerized Deployment (Docker)
+
+To streamline enterprise sidecar orchestration or cloud serverless container executions, a multi-stage `Dockerfile` is included. It partitions the build tooling from the runtime environment.
+
+### 1. Build the Production Container
+Execute the build command from the root repository layout:
+```bash
+docker build -t okta-forwarder-c:latest .
+```
+
+### 2. Run the Container Securely
+Inject your cloud parameters seamlessly at runtime using standard Docker environment switches (`-e`):
+```bash
+docker run --rm \
+  -e OKTA_API_TOKEN="your-secret-ssws-token" \
+  -e OKTA_TENANT_URL="https://okta.com" \
+  okta-forwarder-c:latest
+```
+
+### 3. Piping Logs to a SIEM / Local File
+To simulate a continuous SIEM collector on a production host, route the structured standard output stream out of the container process workspace directly into an infrastructure destination file:
 
 ```bash
-./okta_forwarder_pro >> /var/log/okta_security_alerts.log
+docker run --rm \
+  -e OKTA_API_TOKEN="your-secret-ssws-token" \
+  -e OKTA_TENANT_URL="https://okta.com" \
+  okta-forwarder-c:latest >> /var/log/okta_security_alerts.log
 ```
+
+---
 
 ## 🔍 Sample Output
 
@@ -78,4 +105,6 @@ Timestamp                 Actor Login                    Reason
 
 ## 🔒 Security Best Practices
 * **Least Privilege Access:** The API token generated inside your Okta Administrative console should be configured strictly with a read-only role (`Report Administrator` or similar log-viewing restricted profile).
-* **Environment Sandboxing:** In microservices or Kubernetes deployments, inject these variables using protected **Kubernetes Secrets** mapped directly as environment entries to the container runtime landscape.
+* **Environment Sandboxing:** In microservices or Kubernetes deployments, inject these variables using protected **Kubernetes Secrets** mapped directly as environment entries to the container runtime landscape instead of plain text configuration files.
+* **Minimized Build Tree:** The production stage of the image automatically purges toolchains like `gcc` and `make`. This ensures that even if an arbitrary code execution bug is discovered downstream, an attacker lacks native utilities to build exploits locally on the file system.
+
