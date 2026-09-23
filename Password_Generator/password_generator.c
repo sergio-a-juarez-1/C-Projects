@@ -1,5 +1,5 @@
 /* Author: Sergio Juarez
-Purpose:  This is a Password Generator Program.
+Purpose:  This is a Password Generator Program. This was the original version of the C project found in main.c.
 */
 
 #include <stdio.h>
